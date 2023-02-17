@@ -1,5 +1,5 @@
 const express = require('express');
-const { database } = require('../data/database');
+let { database } = require('../data/database');
 
 const router = express.Router();
 
@@ -10,6 +10,14 @@ router
       name,
       phoneNumber,
     });
+    res.status(200).json(database);
+  })
+  .get('/send', async (req, res) => {
+    res.status(200).json(database);
+  })
+  .post('/remove', async (req, res) => {
+    const { buttonIndex } = req.body;
+    database = database.filter((element, index) => index !== buttonIndex);
     res.status(200).json(database);
   });
 
